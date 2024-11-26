@@ -1,0 +1,15 @@
+<div class="prompt">
+  <div class="prompt-content">
+    <span>Please enter a fizz and buzz time in seconds. <strong>Values should be 2 to 10, inclusive.</strong></span>
+
+    <div class="prompt-input">
+      <label for="fizz">Fizz:</label>
+      <input id="fizz" integer-only [(ngModel)]="fizz">
+      <label for="fizz">Buzz:</label>
+      <input id="buzz" integer-only [(ngModel)]="buzz">
+    </div>
+
+    <button [disabled]="hasInvalidInput()">Go to Timer ></button>
+  </div>
+</div>
+
