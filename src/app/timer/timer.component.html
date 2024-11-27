@@ -1,1 +1,16 @@
-<p>timer works!</p>
+<button (click)="setTimes()">< Set Times</button>
+
+<div class="timer centered">
+  <span class="heading">Time Elapsed</span>
+
+  <div class="timer-container">
+    <div class="timebox">{{time}}</div>
+  </div>
+
+  <div class="timer-buttons">
+    <button class="start-button" (click)="startTimer()">Start</button>
+    <button class="stop-button" (click)="stopTimer()">Stop/Reset</button>
+  </div>
+
+  <div class="fizzbuzz">{{message}}</div>
+</div>

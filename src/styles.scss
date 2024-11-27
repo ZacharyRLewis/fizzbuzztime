@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+$mainColor: #707070;
+$backgroundColor: #F5F5F5;
+
+button {
+  border: 2px solid $mainColor;
+  color: $mainColor;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.centered {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  text-wrap: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+.heading {
+  font-size: 30px;
+}

@@ -1,0 +1,50 @@
+@import "../../styles";
+
+.timer {
+  .timer-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: left;
+  }
+
+  .timebox {
+    font-size: 30px;
+    font-weight: bold;
+    border: 2px solid $mainColor;
+    border-radius: 5px;
+    width: 640px;
+    background-color: $backgroundColor;
+    padding: 28px
+  }
+
+  .timer-buttons {
+    margin-bottom: 65px;
+
+    button {
+      width: 200px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .start-button {
+      background-color: #5CCC87;
+      margin-right: 30px;
+    }
+
+    .stop-button {
+      background-color: #E66666;
+    }
+  }
+
+  .fizzbuzz {
+    font-size: 80px;
+    font-weight: bold;
+  }
+}
+

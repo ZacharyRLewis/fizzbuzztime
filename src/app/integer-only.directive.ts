@@ -6,17 +6,18 @@ import {Directive, ElementRef, EventEmitter, HostListener, Output} from '@angula
 })
 export class IntegerOnlyDirective {
 
-  @Output() valueChange = new EventEmitter()
+  @Output() eventEmitter = new EventEmitter()
 
   constructor(private elementRef: ElementRef) {
   }
 
   @HostListener('input', ['$event']) onInputChange(event: any) {
-    const initalValue = this.elementRef.nativeElement.value;
-    const newValue = initalValue.replace(/[^0-9]*/g, '');
+    const initialValue = this.elementRef.nativeElement.value;
+    const newValue = initialValue.replace(/[^0-9]*/g, '');
     this.elementRef.nativeElement.value = newValue;
-    this.valueChange.emit(newValue);
-    if (initalValue !== this.elementRef.nativeElement.value) {
+    this.eventEmitter.emit(newValue);
+
+    if (initialValue !== this.elementRef.nativeElement.value) {
       event.stopPropagation();
     }
   }

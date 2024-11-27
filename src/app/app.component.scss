@@ -1,4 +1,6 @@
-.content {
+@import "../styles";
+
+.main {
   font-family: Arial;
-  color: #707070;
+  color: $mainColor;
 }
