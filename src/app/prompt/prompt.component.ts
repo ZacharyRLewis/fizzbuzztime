@@ -14,17 +14,17 @@ import {Router} from '@angular/router';
   styleUrl: './prompt.component.scss'
 })
 export class PromptComponent {
+  private router = inject(Router);
+
   @Input() fizz: number | undefined;
   @Input() buzz: number | undefined;
 
-  private router = inject(Router);
-
-  hasInvalidInput() : boolean {
+  public hasInvalidInput() : boolean {
     return !this.fizz || this.fizz < 2 || this.fizz > 10
       || !this.buzz || this.buzz < 2 || this.buzz > 10;
   }
 
-  goToTimer() : void {
+  public goToTimer() : void {
     this.router.navigate(['/timer', this.fizz, this.buzz]);
   }
 }

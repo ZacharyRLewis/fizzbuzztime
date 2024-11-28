@@ -1,5 +1,6 @@
 @import "../../styles";
 
+
 .timer {
   .timer-container {
     margin-top: 50px;
@@ -32,6 +33,10 @@
       cursor: pointer;
     }
 
+    button:disabled {
+      cursor: not-allowed;
+    }
+
     .start-button {
       background-color: #5CCC87;
       margin-right: 30px;
@@ -45,6 +50,6 @@
   .fizzbuzz {
     font-size: 80px;
     font-weight: bold;
+    height: 92px
   }
 }
-

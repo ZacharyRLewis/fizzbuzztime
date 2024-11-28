@@ -1,76 +1,98 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {IntegerOnlyDirective} from '../integer-only.directive';
 
 @Component({
   selector: 'timer',
   standalone: true,
-  imports: [
-    FormsModule,
-    IntegerOnlyDirective
-  ],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.scss'
 })
 export class TimerComponent implements OnInit {
+  private readonly MAX_SECONDS: number = 35999; // 9:59:59
   private router = inject(Router);
   private route = inject(ActivatedRoute);
-  public time: string = '0:00:00';
-  public message: string = '';
   private fizz: number | undefined;
   private buzz: number | undefined;
   private totalSeconds: number = 0;
-  private maxSeconds: number = 35999;
+  private timer: any | undefined;
+  private stopped: boolean = false;
+  private started: boolean = false;
 
-  timer: any | undefined;
+  public time: string = '';
+  public message: string = '';
 
   ngOnInit(): void {
-    this.fizz = this.route.snapshot.params["fizz"];
-    this.buzz = this.route.snapshot.params["buzz"];
+    this.fizz = this.route.snapshot.params['fizz'];
+    this.buzz = this.route.snapshot.params['buzz'];
+    this.updateDisplays();
   }
 
-  startTimer(): void {
-    console.log('Start');
-
-    this.timer = setInterval(() => {
-      this.totalSeconds++;
-
-      let minutes = Math.floor((this.totalSeconds / 60) % 60);
-      let hours = Math.floor(this.totalSeconds / (60 * 60));
-      let seconds = this.totalSeconds % 60;
-
-      this.time = `${hours}:${this.padTimeString(minutes)}:${this.padTimeString(seconds)}`;
-
-      this.message = '';
-
-      if (this.fizz && (this.totalSeconds % this.fizz) == 0) {
-        this.message = "fizz";
-      }
-
-      if (this.buzz && (this.totalSeconds % this.buzz) == 0) {
-        this.message += "buzz";
-      }
-
-      if (this.totalSeconds == this.maxSeconds) {
-        clearInterval(this.timer);
-      }
-    }, 1000);
+  public disableStartButton(): boolean {
+    return this.started || this.totalSeconds === this.MAX_SECONDS;
   }
 
-  stopTimer(): void {
-    console.log('Stop');
-
-    clearInterval(this.timer);
+  public timeHasElapsed(): boolean {
+    return this.totalSeconds > 0;
   }
 
-  setTimes(): void {
+  public setTimes(): void {
     this.router.navigate(['/prompt']);
   }
 
-  padTimeString(timeValue: number): string {
+  public startTimer(): void {
+    this.stopped = false;
+
+    if (!this.started) {
+      this.started = true;
+      this.timer = setInterval(() => {
+        this.totalSeconds++;
+        this.updateDisplays();
+
+        if (this.totalSeconds == this.MAX_SECONDS) {
+          clearInterval(this.timer);
+        }
+      }, 1000);
+    }
+  }
+
+  public stopTimer(): void {
+    clearInterval(this.timer);
+    this.started = false;
+
+    if (this.stopped) {
+      this.resetTimer();
+    } else {
+      this.stopped = true;
+    }
+  }
+
+  private resetTimer(): void {
+    this.totalSeconds = 0;
+    this.updateDisplays();
+  }
+
+  private updateDisplays(): void {
+    let hours = Math.floor(this.totalSeconds / (60 * 60));
+    let minutes = this.padTimeString(Math.floor((this.totalSeconds / 60) % 60));
+    let seconds = this.padTimeString(this.totalSeconds % 60);
+
+    this.time = `${hours}:${minutes}:${seconds}`;
+    this.message = '';
+
+    if (this.totalSeconds > 0 && this.fizz && this.buzz) {
+      if (this.totalSeconds % this.fizz == 0) {
+        this.message = 'fizz';
+      }
+
+      if (this.totalSeconds % this.buzz == 0) {
+        this.message += 'buzz';
+      }
+    }
+  }
+
+  private padTimeString(timeValue: number): string {
     if (timeValue < 10) {
-      return "0" + timeValue;
+      return '0' + timeValue;
     }
     return String(timeValue);
   }
