@@ -19,12 +19,12 @@ export class PromptComponent {
   @Input() public fizz: number | undefined;
   @Input() public buzz: number | undefined;
 
-  public hasInvalidInput() : boolean {
+  public hasInvalidInput(): boolean {
     return !this.fizz || this.fizz < 2 || this.fizz > 10
       || !this.buzz || this.buzz < 2 || this.buzz > 10;
   }
 
-  public goToTimer() : void {
+  public goToTimer(): void {
     this.router.navigate(['/timer', this.fizz, this.buzz]);
   }
 }

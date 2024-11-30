@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { PromptComponent } from './prompt/prompt.component';
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {PromptComponent} from './prompt/prompt.component';
 
 @Component({
   selector: 'app-root',
