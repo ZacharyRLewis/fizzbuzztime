@@ -8,6 +8,5 @@
     <input id="buzz" integer-only [(ngModel)]="buzz">
   </div>
 
-  <button [disabled]="hasInvalidInput()" (click)="goToTimer()">Go to Timer ></button>
+  <button id="go-to-timer-btn" [disabled]="hasInvalidInput()" (click)="goToTimer()">Go to Timer ></button>
 </div>
-

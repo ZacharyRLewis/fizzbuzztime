@@ -16,8 +16,8 @@ import {Router} from '@angular/router';
 export class PromptComponent {
   private router = inject(Router);
 
-  @Input() fizz: number | undefined;
-  @Input() buzz: number | undefined;
+  @Input() public fizz: number | undefined;
+  @Input() public buzz: number | undefined;
 
   public hasInvalidInput() : boolean {
     return !this.fizz || this.fizz < 2 || this.fizz > 10

@@ -1,16 +1,16 @@
-<button [disabled]="timeHasElapsed()" (click)="setTimes()">< Set Times</button>
+<button id="set-times-btn" [disabled]="timeHasElapsed()" (click)="returnToSetTimes()">< Set Times</button>
 
 <div class="timer centered">
   <span class="heading">Time Elapsed</span>
 
   <div class="timer-container">
-    <div class="timebox">{{time}}</div>
+    <div id="timebox">{{time}}</div>
   </div>
 
   <div class="timer-buttons">
-    <button [disabled]="disableStartButton()" class="start-button" (click)="startTimer()">Start</button>
-    <button class="stop-button" (click)="stopTimer()">Stop/Reset</button>
+    <button id="start-btn" [disabled]="disableStartButton()" class="start-button" (click)="startTimer()">Start</button>
+    <button id="stop-btn" class="stop-button" (click)="stopTimer()">Stop/Reset</button>
   </div>
 
-  <div class="fizzbuzz">{{message}}</div>
+  <div id="fizzbuzz">{{message}}</div>
 </div>

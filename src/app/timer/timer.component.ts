@@ -8,16 +8,15 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrl: './timer.component.scss'
 })
 export class TimerComponent implements OnInit {
-  private readonly MAX_SECONDS: number = 35999; // 9:59:59
+  public readonly MAX_SECONDS: number = 35999; // 9:59:59
   private router = inject(Router);
   private route = inject(ActivatedRoute);
-  private fizz: number | undefined;
-  private buzz: number | undefined;
   private totalSeconds: number = 0;
-  private timer: any | undefined;
-  private stopped: boolean = false;
-  private started: boolean = false;
-
+  public fizz: number | undefined;
+  public buzz: number | undefined;
+  public timer: any | undefined;
+  public stopped: boolean = false;
+  public started: boolean = false;
   public time: string = '';
   public message: string = '';
 
@@ -35,7 +34,7 @@ export class TimerComponent implements OnInit {
     return this.totalSeconds > 0;
   }
 
-  public setTimes(): void {
+  public returnToSetTimes(): void {
     this.router.navigate(['/prompt']);
   }
 
@@ -45,12 +44,7 @@ export class TimerComponent implements OnInit {
     if (!this.started) {
       this.started = true;
       this.timer = setInterval(() => {
-        this.totalSeconds++;
-        this.updateDisplays();
-
-        if (this.totalSeconds == this.MAX_SECONDS) {
-          clearInterval(this.timer);
-        }
+        this.tickTock();
       }, 1000);
     }
   }
@@ -60,14 +54,23 @@ export class TimerComponent implements OnInit {
     this.started = false;
 
     if (this.stopped) {
-      this.resetTimer();
+      this.setTotalSeconds(0);
     } else {
       this.stopped = true;
     }
   }
 
-  private resetTimer(): void {
-    this.totalSeconds = 0;
+  public tickTock(): void {
+    this.totalSeconds++;
+    this.updateDisplays();
+
+    if (this.totalSeconds == this.MAX_SECONDS) {
+      clearInterval(this.timer);
+    }
+  }
+
+  public setTotalSeconds(seconds: number) {
+    this.totalSeconds = seconds;
     this.updateDisplays();
   }
 
